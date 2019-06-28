@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardDAO">
+	
+	<insert id="board_insert">
+		insert into prac_board values(prac_board_seq.nextval,#{title},#{contents},#{writer},default,default,#{imgaddr})
+	</insert>
+	
+	<select id="board_showAll" resultType="kh.spring.dto.BoardDTO">
+		select * from prac_board order by prac_board_seq
+	</select>
+	
+	<select id="board_showContent" resultType="kh.spring.dto.BoardDTO">
+		select * from prac_board where prac_board_seq = #{prac_board_seq}
+	</select>
+	
+	<update id="board_viewCount">
+		update prac_board set viewcount = viewcount+1 where prac_board_seq = #{prac_board_seq}
+	</update>
+	
+	<select id="board_count">
+		select count(*) from prac_board
+	</select>
+	
+	<insert id="reply_insert">
+		insert into prac_reply values(prac_reply_seq.nextval,#{prac_board_seq},#{reply_contents},#{reply_writer},default)
+	</insert>
+	
+	<select id="reply_show" resultType="kh.spring.dto.ReplyDTO">
+		select * from prac_reply where prac_board_seq = #{prac_board_seq}
+	</select>
+	
+	<delete id="reply_delete">
+		delete from prac_reply where prac_reply_seq = #{prac_reply_seq}
+	</delete>
+	
+</mapper>

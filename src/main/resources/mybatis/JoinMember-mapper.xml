@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberDAO">
+
+	<insert id="insert">
+		<!--dto값을 받아오기 때문에 dto의 변수명과 같은것을 해줘야 한다. -->
+		insert into prac_member values(message_seq.nextval,#{id},#{pw},#{name},#{age},#{address},#{imgaddr})
+	</insert>
+	
+	<select id="login" resultType="java.lang.Integer">
+		select count(*) from prac_member where id = #{id} and pw = #{pw}
+	</select>
+	
+</mapper>
